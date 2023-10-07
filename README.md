@@ -14,18 +14,15 @@ go build && ./go-series-app run-report
 ```
 
 ### Videos
-<details>
-  <summary>Building a Go app with Cobra and Fiber</summary>
 
-  [Video](https://youtu.be/g1fl41OewQA)
-
-  * Added basic fiber api
-  * Added cobra cli
-  * Split up services to be used by the api or cli
-  * Services is mockable via an interface
-</details>
-
-#### Notes
-    * Need to look into ENV variables
-        * https://github.com/sethvargo/go-envconfig
-        * https://github.com/spf13/viper
+1. [Building a Go app with Cobra and Fiber](https://youtu.be/g1fl41OewQA)
+    <details>
+    <summary>Video Notes</summary>
+        * Added basic fiber api
+        * Added cobra cli
+        * Split up services to be used by the api or cli
+        * Services is mockable via an interface
+        * Need to look into ENV variables
+            * https://github.com/sethvargo/go-envconfig
+            * https://github.com/spf13/viper
+    </details>
