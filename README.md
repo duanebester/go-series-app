@@ -13,11 +13,17 @@ Alternatively, you can run the following command to run the report:
 go build && ./go-series-app run-report
 ```
 
-1. [Building a Go app with Cobra and Fiber](https://youtu.be/g1fl41OewQA)
-    * Added basic fiber api
-    * Added cobra cli
-    * Split up services to be used by the api or cli
-    * Services is mockable via an interface
+### Videos
+<details>
+  <summary>Building a Go app with Cobra and Fiber</summary>
+
+  [Video](https://youtu.be/g1fl41OewQA)
+
+  * Added basic fiber api
+  * Added cobra cli
+  * Split up services to be used by the api or cli
+  * Services is mockable via an interface
+</details>
 
 #### Notes
     * Need to look into ENV variables
