@@ -3,17 +3,17 @@
 This repository contains the code for the Go Streaming Series on YouTube/Twitch.
 
 ## Getting Started
-To build the project, run the following command:
+To build & run the API, you can run the following command:
 ```bash
 go build && ./go-series-app run-api
 ```
 
-Then you can run the api with:
+Alternatively, you can run the following command to run the report:
 ```bash
-./go-series-app run-api
+go build && ./go-series-app run-report
 ```
 
-### [Building a Go app with Cobra and Fiber](https://youtu.be/g1fl41OewQA)
+1. [Building a Go app with Cobra and Fiber](https://youtu.be/g1fl41OewQA)
     * Added basic fiber api
     * Added cobra cli
     * Split up services to be used by the api or cli
