@@ -14,5 +14,10 @@ func NewApi(service services.Services) *fiber.App {
 		return c.JSON(report)
 	})
 
+	api.Get("/product", func(c *fiber.Ctx) error {
+		product := service.GetProduct()
+		return c.JSON(product)
+	})
+
 	return api
 }

@@ -8,6 +8,7 @@ import (
 
 type Services interface {
 	GetReport() models.Report
+	GetProduct() *models.Product
 }
 
 type services struct {

@@ -16,15 +16,24 @@ go build && ./go-series-app run-report
 ### Videos
 
 1. [Building a Go app with Cobra and Fiber](https://youtu.be/g1fl41OewQA)
+2. [Adding ENV config and hot reloading to a Go app](https://youtu.be/U9x1V1adQzI)
 
 <details>
-<summary>Video Notes - 10/06/2023</summary>
+<summary>Video Notes</summary>
 
+10/06/2023
 * Added basic fiber api
 * Added cobra cli
 * Split up services to be used by the api or cli
 * Services is mockable via an interface
-* Need to look into ENV variables
-    * https://github.com/sethvargo/go-envconfig
-    * https://github.com/spf13/viper
+
+10/07/2023
+* Added viper for env config https://github.com/spf13/viper
+* Added air for hot reloading
+
+Need to look into:
+* dockerizing the app
+* UUIDs for the db
+* authz/authn for API hmac for IoT devices
+* passkey based login
 </details>
