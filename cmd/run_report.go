@@ -18,7 +18,7 @@ var runReportCmd = &cobra.Command{
 	Long:  `Hi`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// new db
-		db := database.NewDB()
+		db := database.NewDB(false)
 		service := services.NewService(db)
 		report := service.GetReport()
 		fmt.Println("report: ", report)

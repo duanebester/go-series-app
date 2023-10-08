@@ -19,8 +19,7 @@ var runApiCmd = &cobra.Command{
 	Short: "Hi",
 	Long:  `Hi`,
 	Run: func(cmd *cobra.Command, args []string) {
-		db := database.NewDB()
-		db.AutoMigrate(models.Product{})
+		db := database.NewDB(true)
 		services := services.NewService(db)
 		api := api.NewApi(services)
 		log.Fatal(api.Listen(":3000"))

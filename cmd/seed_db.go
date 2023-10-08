@@ -14,8 +14,6 @@ func init() {
 }
 
 func seedDb(db *gorm.DB) {
-	db.AutoMigrate(&models.Product{})
-
 	insertProduct := &models.Product{Code: "D42", Price: 100}
 
 	db.Create(insertProduct)
@@ -34,7 +32,7 @@ var seedDbCmd = &cobra.Command{
 	Short: "Hi",
 	Long:  `Hi`,
 	Run: func(cmd *cobra.Command, args []string) {
-		db := database.NewDB()
+		db := database.NewDB(true)
 		seedDb(db)
 	},
 }
