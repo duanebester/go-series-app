@@ -19,6 +19,7 @@ type envConfigs struct {
 	DatabaseName string `mapstructure:"POSTGRES_DB"`
 	DatabaseUser string `mapstructure:"POSTGRES_USER"`
 	DatabasePass string `mapstructure:"POSTGRES_PASSWORD"`
+	JwtSecret    string `mapstructure:"JWT_SECRET"`
 }
 
 // Call to load the variables from env

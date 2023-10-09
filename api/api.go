@@ -1,23 +1,46 @@
 package api
 
 import (
+	"go-series-app/handlers"
+	"go-series-app/middleware"
 	"go-series-app/services"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
+	// "github.com/golang-jwt/jwt/v5"
 )
 
 func NewApi(service services.Services) *fiber.App {
-	api := fiber.New()
+	app := fiber.New()
 
-	api.Get("/report", func(c *fiber.Ctx) error {
-		report := service.GetReport()
-		return c.JSON(report)
-	})
+	api := app.Group("/api", logger.New())
 
-	api.Get("/product", func(c *fiber.Ctx) error {
+	// Auth
+	auth := api.Group("/auth")
+	// userService := services.NewUserService(configs.DB)
+	authHandler := handlers.NewAuthHandler(service.UserService())
+
+	auth.Post("/login", authHandler.Login)
+	// User
+	// user := api.Group("/user")
+	// user.Get("/:id", handler.GetUser)
+	// user.Post("/", handler.CreateUser)
+	// user.Patch("/:id", middleware.Protected(), handler.UpdateUser)
+	// user.Delete("/:id", middleware.Protected(), handler.DeleteUser)
+
+	// Product
+	product := api.Group("/product", middleware.Protected())
+	product.Get("/", func(c *fiber.Ctx) error {
 		product := service.GetProduct()
 		return c.JSON(product)
 	})
 
-	return api
+	// Report
+	report := api.Group("/report", middleware.Protected())
+	report.Get("/", func(c *fiber.Ctx) error {
+		report := service.GetReport()
+		return c.JSON(report)
+	})
+
+	return app
 }

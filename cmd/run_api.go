@@ -3,7 +3,6 @@ package cmd
 import (
 	"go-series-app/api"
 	"go-series-app/database"
-	"go-series-app/models"
 	"go-series-app/services"
 	"log"
 
@@ -19,7 +18,7 @@ var runApiCmd = &cobra.Command{
 	Short: "Hi",
 	Long:  `Hi`,
 	Run: func(cmd *cobra.Command, args []string) {
-		db := database.NewDB(true)
+		db := database.NewDB(false)
 		services := services.NewService(db)
 		api := api.NewApi(services)
 		log.Fatal(api.Listen(":3000"))

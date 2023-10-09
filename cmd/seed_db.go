@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"go-series-app/database"
 	"go-series-app/models"
+	"go-series-app/utils"
 
 	"github.com/spf13/cobra"
 	"gorm.io/gorm"
@@ -25,6 +26,13 @@ func seedDb(db *gorm.DB) {
 
 	fmt.Printf("read ID: %d, Code: %s, Prict: %d\n",
 		readProduct.ID, readProduct.Code, readProduct.Price)
+
+	hashedPassword, err := utils.HashPassword("password")
+	if err != nil {
+		panic("failed to seed db: failed to hash password")
+	}
+	insertUser := &models.User{Username: "user1", Email: "test@test.com", Password: hashedPassword}
+	db.Create(insertUser)
 }
 
 var seedDbCmd = &cobra.Command{

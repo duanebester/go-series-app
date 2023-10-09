@@ -17,6 +17,7 @@ go build && ./go-series-app run-report
 
 1. [Building a Go app with Cobra and Fiber](https://youtu.be/g1fl41OewQA)
 2. [Adding ENV config and hot reloading to a Go app](https://youtu.be/U9x1V1adQzI)
+3. [Adding JWT Authentication to a Go Fiber app](https://youtu.be/EFx3rlXgae4)
 
 <details>
 <summary>Video Notes</summary>
@@ -31,9 +32,16 @@ go build && ./go-series-app run-report
 * Added viper for env config https://github.com/spf13/viper
 * Added air for hot reloading
 
+10/08/2023
+* Added JWT auth
+* Added middleware for auth
+* Refactored API to use handlers and middleware
+
 Need to look into:
-* dockerizing the app
+* dockerizing the _whole_ app
 * UUIDs for the db
 * authz/authn for API hmac for IoT devices
 * passkey based login
+* Run seedDB multiple times
+* refactor services and add repository layer?
 </details>
