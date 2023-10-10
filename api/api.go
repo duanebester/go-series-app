@@ -18,9 +18,9 @@ func NewApi(service services.Services) *fiber.App {
 	// Auth
 	auth := api.Group("/auth")
 	// userService := services.NewUserService(configs.DB)
-	authHandler := handlers.NewAuthHandler(service.UserService())
+	// authHandler := handlers.NewAuthHandler(service.UserService())
 
-	auth.Post("/login", authHandler.Login)
+	auth.Post("/login", handlers.Login(service.UserService()))
 	// User
 	// user := api.Group("/user")
 	// user.Get("/:id", handler.GetUser)
@@ -30,17 +30,14 @@ func NewApi(service services.Services) *fiber.App {
 
 	// Product
 	product := api.Group("/product", middleware.Protected())
-	product.Get("/", func(c *fiber.Ctx) error {
-		product := service.GetProduct()
-		return c.JSON(product)
-	})
+	product.Get("/:id", handlers.GetProductByID(service.ProductService()))
 
 	// Report
-	report := api.Group("/report", middleware.Protected())
-	report.Get("/", func(c *fiber.Ctx) error {
-		report := service.GetReport()
-		return c.JSON(report)
-	})
+	// report := api.Group("/report", middleware.Protected())
+	// report.Get("/", func(c *fiber.Ctx) error {
+	// 	report := service.GetReport()
+	// 	return c.JSON(report)
+	// })
 
 	return app
 }

@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"fmt"
-	"go-series-app/database"
-	"go-series-app/services"
+	// "go-series-app/database"
+	// "go-series-app/services"
 
 	"github.com/spf13/cobra"
 )
@@ -18,9 +18,9 @@ var runReportCmd = &cobra.Command{
 	Long:  `Hi`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// new db
-		db := database.NewDB(false)
-		service := services.NewService(db)
-		report := service.GetReport()
-		fmt.Println("report: ", report)
+		// db := database.NewDB(false)
+		// service := services.NewService(db)
+		// report := service.GetReport()
+		fmt.Println("not implemented")
 	},
 }

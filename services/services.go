@@ -1,28 +1,31 @@
 package services
 
 import (
-	"go-series-app/models"
-
 	"gorm.io/gorm"
 )
 
 type Services interface {
-	GetReport() models.Report
-	GetProduct() *models.Product
-	GetUserByUsername(username string) (*models.User, error)
+	ReportService() ReportService
+	ProductService() ProductService
 	UserService() UserService
 }
 
 type services struct {
-	db          *gorm.DB
-	userService UserService
+	db             *gorm.DB
+	userService    UserService
+	productService ProductService
+	reportService  ReportService
 }
 
 func NewService(db *gorm.DB) Services {
 	userService := NewUserService(db)
+	reportService := NewReportService(db)
+	productService := NewProductService(db)
 	return &services{
-		db:          db,
-		userService: userService,
+		db:             db,
+		userService:    userService,
+		productService: productService,
+		reportService:  reportService,
 	}
 }
 
@@ -30,23 +33,10 @@ func (s *services) UserService() UserService {
 	return s.userService
 }
 
-func (s *services) GetProduct() *models.Product {
-	readProduct := &models.Product{}
-	s.db.First(&readProduct, "code = ?", "D42")
-	return readProduct
+func (s *services) ProductService() ProductService {
+	return s.productService
 }
 
-func (s *services) GetReport() models.Report {
-	return models.Report{
-		NumberUsers: 100,
-	}
-}
-
-func (s *services) GetUserByUsername(username string) (*models.User, error) {
-	user := &models.User{}
-	err := s.db.First(&user, "username = ?", username).Error
-	if err != nil {
-		return nil, err
-	}
-	return user, nil
+func (s *services) ReportService() ReportService {
+	return s.reportService
 }
