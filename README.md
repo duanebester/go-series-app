@@ -60,4 +60,7 @@ Need to look into:
 * authz/authn for API hmac for IoT devices
 * passkey based login
 * Run seedDB multiple times
+* Context for authorized user
+* Add tests
+* Roles and permissions
 </details>
