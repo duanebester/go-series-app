@@ -21,9 +21,10 @@ air -c .air.toml run-api
 ### Videos
 
 1. [Building a Go app with Cobra and Fiber](https://youtu.be/g1fl41OewQA)
-2. [Adding ENV config and hot reloading to a Go app](https://youtu.be/U9x1V1adQzI)
-3. [Adding JWT Authentication to a Go Fiber app](https://youtu.be/EFx3rlXgae4)
-4. [Refactoring Go API - Breaking out services](https://youtu.be/RZnTd29Fnr4)
+1. [Adding ENV config and hot reloading to a Go app](https://youtu.be/U9x1V1adQzI)
+1. [Adding JWT Authentication to a Go Fiber app](https://youtu.be/EFx3rlXgae4)
+1. [Refactoring Go API - Breaking out services](https://youtu.be/RZnTd29Fnr4)
+1. [Refactoring Go API - Breaking out repositories]()
 
 <details>
 <summary>Video Notes</summary>
@@ -47,12 +48,16 @@ air -c .air.toml run-api
 * refactored services
 * refactored handlers
 
+10/10/2023
+* refactored services again
+* added repository layer
+* changed models to use uuids
+* started postman collection
+
 Need to look into:
 * dockerizing the _whole_ app
 * UUIDs for the db
 * authz/authn for API hmac for IoT devices
 * passkey based login
 * Run seedDB multiple times
-* add repository layers
-* how can we re-think handlers and services
 </details>

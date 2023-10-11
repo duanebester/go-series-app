@@ -2,29 +2,38 @@ package services
 
 import (
 	"go-series-app/models"
-
-	"gorm.io/gorm"
+	"go-series-app/repositories"
 )
 
 type ProductService interface {
 	GetProductByID(id string) (*models.Product, error)
+	CreateProduct(opts models.Product) (*models.Product, error)
+	UpdateProduct(id string, opts models.Product) (*models.Product, error)
+	DeleteProduct(id string) (*models.Product, error)
 }
 
 type productService struct {
-	db *gorm.DB
+	productRepository repositories.ProductRepository
 }
 
-func NewProductService(db *gorm.DB) ProductService {
+func NewProductService(productRepository repositories.ProductRepository) ProductService {
 	return &productService{
-		db: db,
+		productRepository: productRepository,
 	}
 }
 
 func (s *productService) GetProductByID(id string) (*models.Product, error) {
-	product := &models.Product{}
-	err := s.db.Find(&product, "id = ?", id).Error
-	if err != nil {
-		return nil, err
-	}
-	return product, nil
+	return s.productRepository.GetProductByID(id)
+}
+
+func (s *productService) CreateProduct(opts models.Product) (*models.Product, error) {
+	return s.productRepository.CreateProduct(opts)
+}
+
+func (s *productService) UpdateProduct(id string, opts models.Product) (*models.Product, error) {
+	return s.productRepository.UpdateProduct(id, opts)
+}
+
+func (s *productService) DeleteProduct(id string) (*models.Product, error) {
+	return s.productRepository.DeleteProduct(id)
 }

@@ -7,20 +7,25 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
-	// "github.com/golang-jwt/jwt/v5"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 )
 
 func NewApi(service services.Services) *fiber.App {
-	app := fiber.New()
+	app := fiber.New(fiber.Config{
+		AppName: "go-series-app",
+	})
+	app.Use(recover.New())
+	app.Use(logger.New(logger.Config{
+		Format: "[${time}] ${ip}  ${status} - ${latency} ${method} ${path}\n",
+	}))
 
-	api := app.Group("/api", logger.New())
+	api := app.Group("/api")
 
 	// Auth
 	auth := api.Group("/auth")
-	// userService := services.NewUserService(configs.DB)
-	// authHandler := handlers.NewAuthHandler(service.UserService())
+	authHandler := handlers.NewAuthHandler(service.UserService())
+	auth.Post("/login", authHandler.Login)
 
-	auth.Post("/login", handlers.Login(service.UserService()))
 	// User
 	// user := api.Group("/user")
 	// user.Get("/:id", handler.GetUser)
@@ -29,8 +34,12 @@ func NewApi(service services.Services) *fiber.App {
 	// user.Delete("/:id", middleware.Protected(), handler.DeleteUser)
 
 	// Product
+	productHandler := handlers.NewProductHandler(service.ProductService())
 	product := api.Group("/product", middleware.Protected())
-	product.Get("/:id", handlers.GetProductByID(service.ProductService()))
+	product.Post("/", productHandler.CreateProduct)
+	product.Get("/:id", productHandler.GetProduct)
+	product.Put("/:id", productHandler.UpdateProduct)
+	product.Delete("/:id", productHandler.DeleteProduct)
 
 	// Report
 	// report := api.Group("/report", middleware.Protected())

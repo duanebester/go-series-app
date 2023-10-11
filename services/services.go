@@ -1,6 +1,8 @@
 package services
 
 import (
+	"go-series-app/repositories"
+
 	"gorm.io/gorm"
 )
 
@@ -20,7 +22,8 @@ type services struct {
 func NewService(db *gorm.DB) Services {
 	userService := NewUserService(db)
 	reportService := NewReportService(db)
-	productService := NewProductService(db)
+	productRepo := repositories.NewProductRepository(db)
+	productService := NewProductService(productRepo)
 	return &services{
 		db:             db,
 		userService:    userService,

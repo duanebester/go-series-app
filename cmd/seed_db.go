@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"go-series-app/database"
 	"go-series-app/models"
-	"go-series-app/utils"
 
 	"github.com/spf13/cobra"
 	"gorm.io/gorm"
@@ -15,23 +14,23 @@ func init() {
 }
 
 func seedDb(db *gorm.DB) {
-	insertProduct := &models.Product{Code: "D42", Price: 100}
+	// drop product table if exists
+	// db.Migrator().DropTable(&models.Product{})
+	insertProduct := models.NewProduct(&models.Product{Name: "D42", Price: 100, SKU: "abc123"})
 
 	db.Create(insertProduct)
-	fmt.Printf("insert ID: %d, Code: %s, Prict: %d\n",
-		insertProduct.ID, insertProduct.Code, insertProduct.Price)
+	fmt.Printf("insert ID: %d, Name: %s, Prict: %d\n",
+		insertProduct.ID, insertProduct.Name, insertProduct.Price)
 
 	readProduct := &models.Product{}
-	db.First(&readProduct, "code = ?", "D42") // find product with code D42
+	db.First(&readProduct, "name = ?", "D42") // find product with code D42
 
-	fmt.Printf("read ID: %d, Code: %s, Prict: %d\n",
-		readProduct.ID, readProduct.Code, readProduct.Price)
+	fmt.Printf("read ID: %d, Name: %s, Prict: %d\n",
+		readProduct.ID, readProduct.Name, readProduct.Price)
 
-	hashedPassword, err := utils.HashPassword("password")
-	if err != nil {
-		panic("failed to seed db: failed to hash password")
-	}
-	insertUser := &models.User{Username: "user1", Email: "test@test.com", Password: hashedPassword}
+	// truncate users table
+	// db.Migrator().DropTable(&models.User{})
+	insertUser := models.NewUser(&models.User{Username: "user1", Email: "test@test.com", Password: "password"})
 	db.Create(insertUser)
 }
 
